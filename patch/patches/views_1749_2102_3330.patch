@@ -1,8 +1,8 @@
 diff --git chrome/browser/ui/views/toolbar/app_menu.cc chrome/browser/ui/views/toolbar/app_menu.cc
-index dad17aa686837c8db98877352d8d4f9a35b3b325..fb91ce9014d3eafd163c6ac71ce94551a4d28bae 100644
+index 58dbcfe8123b200525148036cac2b07485c0fb43..f91427e83f337f446983560a1a6868176457573e 100644
 --- chrome/browser/ui/views/toolbar/app_menu.cc
 +++ chrome/browser/ui/views/toolbar/app_menu.cc
-@@ -1067,12 +1067,14 @@ void AppMenu::RunMenu(views::MenuButtonController* host) {
+@@ -1074,12 +1074,14 @@ void AppMenu::RunMenu(views::MenuButtonController* host) {
    UMA_HISTOGRAM_ENUMERATION("WrenchMenu.MenuAction", MENU_ACTION_MENU_OPENED,
                              LIMIT_MENU_ACTION);
  
@@ -23,7 +23,7 @@ index dad17aa686837c8db98877352d8d4f9a35b3b325..fb91ce9014d3eafd163c6ac71ce94551
  }
  
  void AppMenu::RunMenu(views::Widget* parent,
-@@ -1084,7 +1086,8 @@ void AppMenu::RunMenu(views::Widget* parent,
+@@ -1091,7 +1093,8 @@ void AppMenu::RunMenu(views::Widget* parent,
    menu_runner_->RunMenuAt(
        parent, nullptr, anchor_screen_bounds,
        views::MenuAnchorPosition::kTopRight, ui::mojom::MenuSourceType::kNone,
@@ -78,10 +78,10 @@ index 3f92c25f3273a6ea4ac17380884becee8068c4ba..b2fadfd39ddaa586d1d5255716e682b8
    virtual void MenuWillShow() {}
  
 diff --git ui/gfx/render_text.cc ui/gfx/render_text.cc
-index bf767df8582347995d648c017be28af50dc8f40b..d1898db9fc449fee830be6f6679ff1ebc32e3a79 100644
+index 7354fcc97fe319f74239a4cdbac842a842bfdced..052545669d708c776c79632e02324f6e01913f67 100644
 --- ui/gfx/render_text.cc
 +++ ui/gfx/render_text.cc
-@@ -682,6 +682,14 @@ void RenderText::SetWhitespaceElision(std::optional<bool> whitespace_elision) {
+@@ -689,6 +689,14 @@ void RenderText::SetWhitespaceElision(std::optional<bool> whitespace_elision) {
    }
  }
  
@@ -96,7 +96,7 @@ index bf767df8582347995d648c017be28af50dc8f40b..d1898db9fc449fee830be6f6679ff1eb
  void RenderText::SetDisplayRect(const Rect& r) {
    if (r != display_rect_) {
      display_rect_ = r;
-@@ -2165,6 +2173,18 @@ void RenderText::OnTextAttributeChanged() {
+@@ -2172,6 +2180,18 @@ void RenderText::OnTextAttributeChanged() {
    text_elided_ = false;
  
    layout_text_up_to_date_ = false;
@@ -274,7 +274,7 @@ index 0d89a9cd05ec22adf56cb0aaf0593b644abeb560..f05bcc3d41aa2322fbe4ba253dcfe555
    std::unique_ptr<SelectionController> selection_controller_;
  
 diff --git ui/views/controls/menu/menu_controller.cc ui/views/controls/menu/menu_controller.cc
-index c58f75ab1bfbac5613f6ff6edefe97ee0ea2e62b..51cda10821b75e8da62284d449eb007a4b5b7962 100644
+index 63f140c698fb1e5ba1f93c24bfe19bc3f87cec19..db3b1047a58a7b323852085dccf97476b9986571 100644
 --- ui/views/controls/menu/menu_controller.cc
 +++ ui/views/controls/menu/menu_controller.cc
 @@ -612,7 +612,8 @@ void MenuController::Run(Widget* parent,
@@ -295,7 +295,7 @@ index c58f75ab1bfbac5613f6ff6edefe97ee0ea2e62b..51cda10821b75e8da62284d449eb007a
  
      // Only create a MenuPreTargetHandler for non-nested menus. Nested menus
      // will use the existing one.
-@@ -2493,6 +2495,7 @@ void MenuController::OpenMenuImpl(MenuItemView* item, bool show) {
+@@ -2499,6 +2501,7 @@ void MenuController::OpenMenuImpl(MenuItemView* item, bool show) {
      params.do_capture = do_capture;
      params.native_view_for_gestures = native_view_for_gestures_;
      params.owned_window_anchor = anchor;
@@ -303,7 +303,7 @@ index c58f75ab1bfbac5613f6ff6edefe97ee0ea2e62b..51cda10821b75e8da62284d449eb007a
      if (item->GetParentMenuItem()) {
        params.context = item->GetWidget();
        // (crbug.com/1414232) The item to be open is a submenu. Make sure
-@@ -3224,7 +3227,11 @@ MenuItemView* MenuController::FindInitialSelectableMenuItem(
+@@ -3230,7 +3233,11 @@ MenuItemView* MenuController::FindInitialSelectableMenuItem(
  
  void MenuController::OpenSubmenuChangeSelectionIfCan() {
    MenuItemView* item = pending_state_.item;
@@ -316,7 +316,7 @@ index c58f75ab1bfbac5613f6ff6edefe97ee0ea2e62b..51cda10821b75e8da62284d449eb007a
      return;
    }
  
-@@ -3249,6 +3256,7 @@ void MenuController::CloseSubmenu() {
+@@ -3255,6 +3262,7 @@ void MenuController::CloseSubmenu() {
    MenuItemView* item = state_.item;
    DCHECK(item);
    if (!item->GetParentMenuItem()) {
@@ -325,7 +325,7 @@ index c58f75ab1bfbac5613f6ff6edefe97ee0ea2e62b..51cda10821b75e8da62284d449eb007a
    }
    if (item->SubmenuIsShowing()) {
 diff --git ui/views/controls/menu/menu_controller.h ui/views/controls/menu/menu_controller.h
-index 7e9541332db5cecd38e4eb0888f5d4520bebcf34..0c653f339dfdeb4934511a151dce5fe70502f284 100644
+index fd62a4c95aa0d81ecabe23c14cabf2d2c6bf2a28..e8d309e5419615deae7eaf98a9be476cd6b02ab8 100644
 --- ui/views/controls/menu/menu_controller.h
 +++ ui/views/controls/menu/menu_controller.h
 @@ -147,7 +147,8 @@ class VIEWS_EXPORT MenuController final : public gfx::AnimationDelegate,
@@ -348,7 +348,7 @@ index 7e9541332db5cecd38e4eb0888f5d4520bebcf34..0c653f339dfdeb4934511a151dce5fe7
    bool possible_drag_ = false;
  
 diff --git ui/views/controls/menu/menu_delegate.h ui/views/controls/menu/menu_delegate.h
-index ea82da6dc2f45625c9e8fe958715399e127699d8..575bd9484c2bf3bb72577136e2afae0ea4f84f66 100644
+index 93b78fd05676badc4f459f2100155747c85fbdb2..9aed4488068f2fb23f9f791df9b1854b468eb3ae 100644
 --- ui/views/controls/menu/menu_delegate.h
 +++ ui/views/controls/menu/menu_delegate.h
 @@ -73,6 +73,22 @@ class VIEWS_EXPORT MenuDelegate {
@@ -387,7 +387,7 @@ index ea82da6dc2f45625c9e8fe958715399e127699d8..575bd9484c2bf3bb72577136e2afae0e
    virtual int GetMaxWidthForMenu(MenuItemView* menu);
  
 diff --git ui/views/controls/menu/menu_host.cc ui/views/controls/menu/menu_host.cc
-index 29c2f1dc3c11220a25dac6af2877cbfb82fae70d..8e8b0162a1936df3624cf6ce4d23adaebcc0a6e3 100644
+index 81281fb257cfd85da95106a2e10867d8b386c5dd..007caebd13e8f1dea09c884fdcd4dcde2975fce5 100644
 --- ui/views/controls/menu/menu_host.cc
 +++ ui/views/controls/menu/menu_host.cc
 @@ -153,6 +153,8 @@ void MenuHost::InitMenuHost(const InitParams& init_params) {
@@ -410,7 +410,7 @@ index 29c2f1dc3c11220a25dac6af2877cbfb82fae70d..8e8b0162a1936df3624cf6ce4d23adae
    }
  
 diff --git ui/views/controls/menu/menu_host.h ui/views/controls/menu/menu_host.h
-index fc1d5fccc3845b204d2a85bc5e00c0ffb4aee0d7..c065cafcd537c4e28a633569e170d65cde97b0b8 100644
+index 0fcc13c805a643c96f682d10bfeb8ffdf6a64db1..3e5711779ba1d8226adc6440eb4010f32b0e773a 100644
 --- ui/views/controls/menu/menu_host.h
 +++ ui/views/controls/menu/menu_host.h
 @@ -57,6 +57,8 @@ class MenuHost : public Widget, public WidgetObserver {
@@ -809,7 +809,7 @@ index 8038c157ff59292c242c41b86394e5e19cf6d640..ca46ede189e018c9ed571717e9a7e084
    if (root_location != root_current_location &&
        !g_ozone_ui_controls_test_helper->MustUseUiControlsForMoveCursorTo() &&
 diff --git ui/views/view.h ui/views/view.h
-index 97c8014fadf2231321c05a1f74d91418946bf9fc..68a849650d095268f5e96da04315e05344aa3f7b 100644
+index ea27a73076554aa286c67a506fe5e0f60986d733..6d27c9e7efe4589aa2630338372226476b952314 100644
 --- ui/views/view.h
 +++ ui/views/view.h
 @@ -26,6 +26,7 @@

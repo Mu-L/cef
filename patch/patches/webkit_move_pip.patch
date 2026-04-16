@@ -25,10 +25,10 @@ index cccf164d978761dac8148d11fbddfbeb9ecfb048..29cabb837ae536394ac467a42be50461
    int window_diff_height = work_area.bottom() - window_bounds.height();
  
 diff --git content/renderer/render_frame_impl.cc content/renderer/render_frame_impl.cc
-index 6ee766c52202804adc532b1585224b4e35239f9a..91265a8e96e1e7abd30b7d8b7ed4a1adc9174831 100644
+index 5936c5eaa081abde7f7c26cc990a122622e46908..b2e09f7231b6b7f4535fc65adc6c339778063a64 100644
 --- content/renderer/render_frame_impl.cc
 +++ content/renderer/render_frame_impl.cc
-@@ -6865,6 +6865,8 @@ WebView* RenderFrameImpl::CreateNewWindow(
+@@ -6831,6 +6831,8 @@ WebView* RenderFrameImpl::CreateNewWindow(
          pip_options->disallow_return_to_opener;
      pip_mojom_opts->prefer_initial_window_placement =
          pip_options->prefer_initial_window_placement;
@@ -105,10 +105,10 @@ index 932658273154ef2e022358e493a8e7c00c86e732..6a1b5bbe94772a947ac8055e4e0971f7
    ~WebView() = default;
  };
 diff --git third_party/blink/renderer/bindings/generated_in_modules.gni third_party/blink/renderer/bindings/generated_in_modules.gni
-index 07b1d2f33ae1a787b1993f103b57ece2b1bc22cd..49f09470555228c15a2c854206cbd1d706095c38 100644
+index d289c4da70e66215e4af29eb7aba49da76155528..f386518ed5ff528870024584d8a8fcade5815bbd 100644
 --- third_party/blink/renderer/bindings/generated_in_modules.gni
 +++ third_party/blink/renderer/bindings/generated_in_modules.gni
-@@ -390,6 +390,10 @@ generated_dictionary_sources_in_modules = [
+@@ -394,6 +394,10 @@ generated_dictionary_sources_in_modules = [
    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_directory_picker_options.h",
    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_display_media_stream_options.cc",
    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_display_media_stream_options.h",
@@ -120,7 +120,7 @@ index 07b1d2f33ae1a787b1993f103b57ece2b1bc22cd..49f09470555228c15a2c854206cbd1d7
    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_document_picture_in_picture_event_init.h",
    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_document_picture_in_picture_options.cc",
 diff --git third_party/blink/renderer/core/exported/web_view_impl.h third_party/blink/renderer/core/exported/web_view_impl.h
-index ff153875857fe718676389ee4f0096ca41407cf3..f816c7d9783d71f6ae628ad93fb069c2564cc73d 100644
+index b2ad789e53146b06e0e416f2dcf384cf7e9c17ae..9a89b676bfb3253fdbd6ccde59b1f2e8bc8c4403 100644
 --- third_party/blink/renderer/core/exported/web_view_impl.h
 +++ third_party/blink/renderer/core/exported/web_view_impl.h
 @@ -322,6 +322,20 @@ class CORE_EXPORT WebViewImpl final : public WebView,
@@ -144,9 +144,9 @@ index ff153875857fe718676389ee4f0096ca41407cf3..f816c7d9783d71f6ae628ad93fb069c2
    void DispatchPersistedPageshow(base::TimeTicks navigation_start);
    void DispatchPagehide(mojom::blink::PagehideDispatch pagehide_dispatch);
    void HookBackForwardCacheEviction(bool hook);
-@@ -1030,6 +1044,9 @@ class CORE_EXPORT WebViewImpl final : public WebView,
-   // CSS property.
-   bool supports_draggable_regions_ = false;
+@@ -1032,6 +1046,9 @@ class CORE_EXPORT WebViewImpl final : public WebView,
+   // native restoration. Reset on each lifecycle update.
+   bool last_page_lifecycle_state_update_restored_from_bfcache_ = false;
  
 +  bool move_pip_enabled_ = false;
 +  bool allow_pip_without_user_activation_ = false;
@@ -155,7 +155,7 @@ index ff153875857fe718676389ee4f0096ca41407cf3..f816c7d9783d71f6ae628ad93fb069c2
    base::ObserverList<WebViewObserver> observers_;
  #if !BUILDFLAG(IS_ANDROID) && !BUILDFLAG(IS_IOS)
 diff --git third_party/blink/renderer/core/frame/local_dom_window.cc third_party/blink/renderer/core/frame/local_dom_window.cc
-index 06efc300ee7a014759de6d0d61d0ced6c8bb965f..37362b6621b8f243d4f3fff5d791dd8aeba6a6ff 100644
+index 51f03729c2d40a225dbcfc42091d44f78f77d971..8f12dc87cac6b6ac4aa401fa9a0d85ab5253b58f 100644
 --- third_party/blink/renderer/core/frame/local_dom_window.cc
 +++ third_party/blink/renderer/core/frame/local_dom_window.cc
 @@ -51,6 +51,7 @@
@@ -216,7 +216,7 @@ index 06efc300ee7a014759de6d0d61d0ced6c8bb965f..37362b6621b8f243d4f3fff5d791dd8a
        exception_state.ThrowDOMException(
            DOMExceptionCode::kNotAllowedError,
            "resizeTo() requires user activation in document picture-in-picture");
-@@ -2493,6 +2499,12 @@ DOMWindow* LocalDOMWindow::openPictureInPictureWindow(
+@@ -2494,6 +2500,12 @@ DOMWindow* LocalDOMWindow::openPictureInPictureWindow(
        To<LocalDOMWindow>(result.frame->DomWindow());
    pip_dom_window->SetIsPictureInPictureWindow();
  
@@ -230,10 +230,10 @@ index 06efc300ee7a014759de6d0d61d0ced6c8bb965f..37362b6621b8f243d4f3fff5d791dd8a
    pip_dom_window->document()->SetCompatibilityMode(
        entered_window->document()->GetCompatibilityMode());
 diff --git third_party/blink/renderer/core/frame/local_dom_window.h third_party/blink/renderer/core/frame/local_dom_window.h
-index cf995f0b8ae6c192247aa9d5769a0043e490e8c3..8e9de1504c5318b01c1b8ef4128bc6574a8f5235 100644
+index 714daa2ef89ee4bb47fb6c0410aae3baa24bef39..2b0a7c4462173167a582e8470d28d6b5b8479bed 100644
 --- third_party/blink/renderer/core/frame/local_dom_window.h
 +++ third_party/blink/renderer/core/frame/local_dom_window.h
-@@ -607,6 +607,11 @@ class CORE_EXPORT LocalDOMWindow final : public DOMWindow,
+@@ -599,6 +599,11 @@ class CORE_EXPORT LocalDOMWindow final : public DOMWindow,
  
    void SetIsPictureInPictureWindow();
  
@@ -245,7 +245,7 @@ index cf995f0b8ae6c192247aa9d5769a0043e490e8c3..8e9de1504c5318b01c1b8ef4128bc657
    // Return the viewport size including scrollbars.
    gfx::Size GetViewportSize() const;
  
-@@ -713,6 +718,8 @@ class CORE_EXPORT LocalDOMWindow final : public DOMWindow,
+@@ -705,6 +710,8 @@ class CORE_EXPORT LocalDOMWindow final : public DOMWindow,
    // https://wicg.github.io/document-picture-in-picture/
    bool is_picture_in_picture_window_ = false;
  

@@ -27,10 +27,10 @@ index 066dcd99651f0eda2216f19f0d818de9db4cb074..7ea449e4a951c71f695f0d8b23bbec6a
            &GtkUi::OnCursorThemeNameChanged);
    connect(settings, "notify::gtk-cursor-theme-size",
 diff --git ui/ozone/platform/x11/ozone_platform_x11.cc ui/ozone/platform/x11/ozone_platform_x11.cc
-index 71924ab2d033bf65dd6353f80827d702a6093520..35cba0f7bf420cd3d955a4ce13c739ff46223ab9 100644
+index 33d4a4a084cf8cb57db2b7765598de93ae905fd1..1cb9e18fb4b697989dbb36bd3260674a9d67e50b 100644
 --- ui/ozone/platform/x11/ozone_platform_x11.cc
 +++ ui/ozone/platform/x11/ozone_platform_x11.cc
-@@ -64,6 +64,8 @@ namespace ui {
+@@ -65,6 +65,8 @@ namespace ui {
  
  namespace {
  
@@ -39,7 +39,7 @@ index 71924ab2d033bf65dd6353f80827d702a6093520..35cba0f7bf420cd3d955a4ce13c739ff
  // Singleton OzonePlatform implementation for X11 platform.
  class OzonePlatformX11 : public OzonePlatform,
                           public OSExchangeDataProviderFactoryOzone {
-@@ -273,7 +275,15 @@ class OzonePlatformX11 : public OzonePlatform,
+@@ -274,7 +276,15 @@ class OzonePlatformX11 : public OzonePlatform,
      TouchFactory::SetTouchDeviceListFromCommandLine();
  
  #if BUILDFLAG(USE_GTK)
@@ -56,7 +56,7 @@ index 71924ab2d033bf65dd6353f80827d702a6093520..35cba0f7bf420cd3d955a4ce13c739ff
  #endif
  
      menu_utils_ = std::make_unique<X11MenuUtils>();
-@@ -372,4 +382,8 @@ OzonePlatform* CreateOzonePlatformX11() {
+@@ -373,4 +383,8 @@ OzonePlatform* CreateOzonePlatformX11() {
    return new OzonePlatformX11;
  }
  

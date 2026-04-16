@@ -1,18 +1,18 @@
 diff --git BUILD.gn BUILD.gn
-index 0cb785515c6c1bde3f47226cef6da461b693adc2..5d77146d23467942e6be8ac9e2cdc723600944bd 100644
+index 25b4724b819ee73324694475ec3cdf9380f6e90b..dc04e23588a611b54d2702913027d8bb7994c4d1 100644
 --- BUILD.gn
 +++ BUILD.gn
-@@ -89,6 +89,9 @@ declare_args() {
- 
-   # Prefix where the artifacts should be installed on the system
+@@ -91,6 +91,9 @@ declare_args() {
    install_prefix = ""
+ 
+   angle_use_crypto_hasher = build_with_chromium
 +
 +  angle_commit_id = ""
 +  angle_commit_position = "0"
  }
  
  declare_args() {
-@@ -910,6 +913,8 @@ action("angle_commit_id") {
+@@ -915,6 +918,8 @@ action("angle_commit_id") {
      "gen",
      rebase_path(_commit_id_header, root_build_dir),
      rebase_path(depfile, root_build_dir),

@@ -880,7 +880,7 @@ void CefFrameImpl::SendJavaScript(const std::u16string& jsCode,
           [](const std::u16string& jsCode, const std::string& scriptUrl,
              blink::WebLocalFrame* frame) {
             frame->ExecuteScript(blink::WebScriptSource(
-                blink::WebString::FromUTF16(jsCode), GURL(scriptUrl)));
+                blink::WebString::FromUtf16(jsCode), GURL(scriptUrl)));
           },
           jsCode, scriptUrl));
 }

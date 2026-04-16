@@ -548,7 +548,7 @@ void CefRequestImpl::Get(const cef::mojom::RequestParamsPtr& params,
   request.SetUrl(params->url);
   request.SetRequestorOrigin(blink::WebSecurityOrigin::Create(params->url));
   if (!params->method.empty()) {
-    request.SetHttpMethod(blink::WebString::FromASCII(params->method));
+    request.SetHttpMethod(blink::WebString::FromAscii(params->method));
   }
 
   if (params->referrer && params->referrer->url.is_valid()) {
@@ -575,17 +575,17 @@ void CefRequestImpl::Get(const cef::mojom::RequestParamsPtr& params,
   if (params->upload_data) {
     const std::u16string& method = request.HttpMethod().Utf16();
     if (method == u"GET" || method == u"HEAD") {
-      request.SetHttpMethod(blink::WebString::FromASCII("POST"));
+      request.SetHttpMethod(blink::WebString::FromAscii("POST"));
     }
 
     // The comparison performed by httpHeaderField() is case insensitive.
     if (request
-            .HttpHeaderField(blink::WebString::FromASCII(
+            .HttpHeaderField(blink::WebString::FromAscii(
                 net::HttpRequestHeaders::kContentType))
             .length() == 0) {
       request.SetHttpHeaderField(
-          blink::WebString::FromASCII(net::HttpRequestHeaders::kContentType),
-          blink::WebString::FromASCII(
+          blink::WebString::FromAscii(net::HttpRequestHeaders::kContentType),
+          blink::WebString::FromAscii(
               net_service::kContentTypeApplicationFormURLEncoded));
     }
 

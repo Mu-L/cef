@@ -1116,9 +1116,9 @@ bool CefV8ContextImpl::Eval(const CefString& code,
   v8::Context::Scope context_scope(context);
 
   const blink::WebString& source =
-      blink::WebString::FromUTF16(code.ToString16());
+      blink::WebString::FromUtf16(code.ToString16());
   const blink::WebString& source_url =
-      blink::WebString::FromUTF16(script_url.ToString16());
+      blink::WebString::FromUtf16(script_url.ToString16());
 
   v8::TryCatch try_catch(isolate);
   try_catch.SetVerbose(true);

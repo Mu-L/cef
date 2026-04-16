@@ -946,7 +946,8 @@ viz::FrameSinkId CefRenderWidgetHostViewOSR::GetRootFrameSinkId() {
 }
 
 void CefRenderWidgetHostViewOSR::NotifyHostAndDelegateOnWasShown(
-    blink::mojom::RecordContentToVisibleTimeRequestPtr visible_time_request) {
+    std::optional<blink::RecordContentToVisibleTimeRequest>
+        visible_time_request) {
   // We don't call RenderWidgetHostViewBase::OnShowWithPageVisibility, so this
   // method should not be called.
   DCHECK(false);
@@ -954,8 +955,7 @@ void CefRenderWidgetHostViewOSR::NotifyHostAndDelegateOnWasShown(
 
 void CefRenderWidgetHostViewOSR::
     RequestSuccessfulPresentationTimeFromHostOrDelegate(
-        blink::mojom::RecordContentToVisibleTimeRequestPtr
-            visible_time_request) {
+        blink::RecordContentToVisibleTimeRequest visible_time_request) {
   // We don't call RenderWidgetHostViewBase::OnShowWithPageVisibility, so this
   // method should not be called.
   DCHECK(false);

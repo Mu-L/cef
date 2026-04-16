@@ -1,5 +1,5 @@
 diff --git gpu/command_buffer/service/shared_image/d3d_image_backing_factory.cc gpu/command_buffer/service/shared_image/d3d_image_backing_factory.cc
-index 6f31a20329a7bc7cafb6384c3b8ec9ed7a11e64e..936ade7a42d9a5267597d544e886f48b91b92785 100644
+index 187335d304774643bdec345e7b52be3fe0b105f9..60266d775381ed350fc696f7d8d09b64f3e573ca 100644
 --- gpu/command_buffer/service/shared_image/d3d_image_backing_factory.cc
 +++ gpu/command_buffer/service/shared_image/d3d_image_backing_factory.cc
 @@ -379,7 +379,8 @@ gfx::GpuMemoryBufferHandle D3DImageBackingFactory::CreateGpuMemoryBufferHandle(
@@ -24,10 +24,10 @@ index 6f31a20329a7bc7cafb6384c3b8ec9ed7a11e64e..936ade7a42d9a5267597d544e886f48b
    Microsoft::WRL::ComPtr<ID3D11Texture2D> d3d11_texture;
  
 diff --git media/video/renderable_mappable_shared_image_video_frame_pool.cc media/video/renderable_mappable_shared_image_video_frame_pool.cc
-index 36ed797edc58a6cf094a0b720bf949b3f6379890..5ec6e1d95ad1ba398b26d2aaacc1f3b3be8e2c45 100644
+index 6b1abdebe1fb0043f535e731d0bd14a6d3e3c083..f16506c46778e76c2f76181bcbf7c7b9658f78d9 100644
 --- media/video/renderable_mappable_shared_image_video_frame_pool.cc
 +++ media/video/renderable_mappable_shared_image_video_frame_pool.cc
-@@ -196,6 +196,23 @@ bool FrameResources::Initialize(VideoPixelFormat format,
+@@ -197,6 +197,23 @@ bool FrameResources::Initialize(VideoPixelFormat format,
  
    gfx::BufferUsage buffer_usage = gfx::BufferUsage::SCANOUT_CPU_READ_WRITE;
  

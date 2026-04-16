@@ -124,7 +124,7 @@ index 7d1beedfffbfdd34323cfb749bec83187b54778e..d4c79e26e51deb9a32fb9649a1c21a18
    // Factory for the creating refs in callbacks.
    base::WeakPtrFactory<VersionHandler> weak_ptr_factory_{this};
 diff --git chrome/browser/ui/webui/version/version_ui.cc chrome/browser/ui/webui/version/version_ui.cc
-index ea613f37066c1cc26fb0ac657b009338e08ef8a6..101b5ed429d3cabbab55bbda57b7843cbff41784 100644
+index 66ec30207e57c61db1275b8fd45c17ceb0c2ecf4..8c14c73432ff48095de53afc8b13db20d81b9a5d 100644
 --- chrome/browser/ui/webui/version/version_ui.cc
 +++ chrome/browser/ui/webui/version/version_ui.cc
 @@ -19,6 +19,7 @@
@@ -157,7 +157,7 @@ index ea613f37066c1cc26fb0ac657b009338e08ef8a6..101b5ed429d3cabbab55bbda57b7843c
        {version_ui::kVariationsName, IDS_VERSION_UI_VARIATIONS},
        {version_ui::kVariationsCmdName, IDS_VERSION_UI_VARIATIONS_CMD},
        {version_ui::kCopyVariationsLabel, IDS_VERSION_UI_COPY_VARIATIONS_LABEL},
-@@ -120,6 +129,10 @@ void CreateAndAddVersionUIDataSource(Profile* profile) {
+@@ -122,6 +131,10 @@ void CreateAndAddVersionUIDataSource(Profile* profile) {
    html_source->AddResourcePath("images/product_logo_white.png",
                                 IDR_PRODUCT_LOGO_WHITE);
  #endif  // BUILDFLAG(IS_ANDROID)
@@ -168,7 +168,7 @@ index ea613f37066c1cc26fb0ac657b009338e08ef8a6..101b5ed429d3cabbab55bbda57b7843c
  }
  
  std::string GetProductModifier() {
-@@ -255,6 +268,10 @@ void VersionUI::AddVersionDetailStrings(content::WebUIDataSource* html_source) {
+@@ -257,6 +270,10 @@ void VersionUI::AddVersionDetailStrings(content::WebUIDataSource* html_source) {
    // blank.
    html_source->AddString(version_ui::kExecutablePath, std::string_view());
    html_source->AddString(version_ui::kProfilePath, std::string_view());
@@ -180,7 +180,7 @@ index ea613f37066c1cc26fb0ac657b009338e08ef8a6..101b5ed429d3cabbab55bbda57b7843c
  #if BUILDFLAG(IS_MAC)
    html_source->AddString(version_ui::kOSType, base::mac::GetOSDisplayName());
 diff --git components/version_ui_strings.grdp components/version_ui_strings.grdp
-index 7c3d198ccdb52b57884c6d8aa2aeac0438425642..4a15d9d7f1e13bbe3fad265b60b1f85179c38cbf 100644
+index 7a47d7fc06232843a1077e4d4b11d51ad4edfb58..957ea16bd98e069d2f29611308d7fe4c1d986ee2 100644
 --- components/version_ui_strings.grdp
 +++ components/version_ui_strings.grdp
 @@ -76,6 +76,14 @@
@@ -233,7 +233,7 @@ index 474768656bdae1d5c212bfd3034c8f8bfe718983..2ca20f8cc7251ad92b1845ce4bc8a2de
 +  font-size: 0.8em;
 +}
 diff --git components/webui/version/resources/about_version.html components/webui/version/resources/about_version.html
-index e4ad426e42bca8340ade73291fc2e02fc3e8a576..13e754cbffbf3b86dad450f463d880d1bb474442 100644
+index 3b689206909bf911f4e1d1ed97285a38af615136..83b41ccdc28138ff6ac314ca46dfd7a250dc6453 100644
 --- components/webui/version/resources/about_version.html
 +++ components/webui/version/resources/about_version.html
 @@ -49,9 +49,21 @@ about:version template page
@@ -276,7 +276,7 @@ index e4ad426e42bca8340ade73291fc2e02fc3e8a576..13e754cbffbf3b86dad450f463d880d1
            <td class="version" id="profile_path">$i18n{profile_path}</td>
          </tr>
  </if>
-@@ -188,6 +208,17 @@ about:version template page
+@@ -192,6 +212,17 @@ about:version template page
            <td class="version" id="sanitizer">$i18n{sanitizer}</td>
          </tr>
        </table>
@@ -295,7 +295,7 @@ index e4ad426e42bca8340ade73291fc2e02fc3e8a576..13e754cbffbf3b86dad450f463d880d1
  
      <div id="messages" role="alert" aria-live="polite" aria-relevant="additions">
 diff --git components/webui/version/resources/about_version.ts components/webui/version/resources/about_version.ts
-index ea5f11471acf26622b2f286d26bf47bceb6137ac..f604065bbe8feec78b9f029ac513a1aa6203fe14 100644
+index 178845ee73fd05ba5b2ba3071a39d57a2fc2480f..013731729237c3a44b09576b100925c575061624 100644
 --- components/webui/version/resources/about_version.ts
 +++ components/webui/version/resources/about_version.ts
 @@ -72,9 +72,21 @@ function handleVariationInfo(
@@ -321,8 +321,21 @@ index ea5f11471acf26622b2f286d26bf47bceb6137ac..f604065bbe8feec78b9f029ac513a1aa
  }
  
  // <if expr="is_win">
+@@ -184,7 +196,11 @@ function initialize() {
+   sendWithPromise<{variationsList: string[], variationsCmd: string}>(
+       'requestVariationInfo', includeVariationsCmd)
+       .then(handleVariationInfo);
+-  sendWithPromise<{execPath: string, profilePath: string}>('requestPathInfo')
++  sendWithPromise<{execPath: string, profilePath: string
++// <if expr="enable_cef">
++      , modulePath: string, userDataPath: string
++// </if>
++      }>('requestPathInfo')
+       .then(handlePathInfo);
+ 
+   if (getRequiredElement('variations-source').textContent !== '') {
 diff --git components/webui/version/version_ui_constants.cc components/webui/version/version_ui_constants.cc
-index 3828e8e25bbcdbfe232d6feacb1b72f66d8cc79e..afd115b6eb82ea7043866f7c45f15bda4c115fdb 100644
+index 7b7be3eae6656d88030eb927f522de01550f8ff6..af7a2b21a8344e2089bb68fa0f8659b8558d6adf 100644
 --- components/webui/version/version_ui_constants.cc
 +++ components/webui/version/version_ui_constants.cc
 @@ -5,6 +5,7 @@
@@ -333,7 +346,7 @@ index 3828e8e25bbcdbfe232d6feacb1b72f66d8cc79e..afd115b6eb82ea7043866f7c45f15bda
  
  namespace version_ui {
  
-@@ -90,4 +91,15 @@ const char kVersionSuffix[] = "version_suffix";
+@@ -92,4 +93,15 @@ const char kVersionSuffix[] = "version_suffix";
  const char kVersionModifier[] = "version_modifier";
  const char kVersionProcessorVariation[] = "version_processor_variation";
  
@@ -350,7 +363,7 @@ index 3828e8e25bbcdbfe232d6feacb1b72f66d8cc79e..afd115b6eb82ea7043866f7c45f15bda
 +
  }  // namespace version_ui
 diff --git components/webui/version/version_ui_constants.h components/webui/version/version_ui_constants.h
-index a3a92aa75848dd0763cb389a8029fc5e2c8647bf..4dedc4390e85c6a36857b1c33b12be776e92cb4f 100644
+index 775826ee0b02062373fb17beee17c471dfdcf19b..713173878f6486eb549dc2db44042662fc23e57f 100644
 --- components/webui/version/version_ui_constants.h
 +++ components/webui/version/version_ui_constants.h
 @@ -6,6 +6,7 @@
@@ -361,7 +374,7 @@ index a3a92aa75848dd0763cb389a8029fc5e2c8647bf..4dedc4390e85c6a36857b1c33b12be77
  
  namespace version_ui {
  
-@@ -94,6 +95,17 @@ extern const char kVersionSuffix[];
+@@ -96,6 +97,17 @@ extern const char kVersionSuffix[];
  extern const char kVersionModifier[];
  extern const char kVersionProcessorVariation[];
  

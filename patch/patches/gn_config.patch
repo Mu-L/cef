@@ -1,5 +1,5 @@
 diff --git .gn .gn
-index ae58a0b0a64ae1fdb3f9cd8587041d71a121c6b9..35e01ee64e5d75496b687870abb6a42d1bc96352 100644
+index 0013a7fd5a260ea4f04f6421031a571c7bbf90b9..c1388a32de5c756071660e3046e56e98c4066ecc 100644
 --- .gn
 +++ .gn
 @@ -156,6 +156,8 @@ exec_script_allowlist =
@@ -12,7 +12,7 @@ index ae58a0b0a64ae1fdb3f9cd8587041d71a121c6b9..35e01ee64e5d75496b687870abb6a42d
  
        "//google_apis/BUILD.gn",
 diff --git BUILD.gn BUILD.gn
-index f8b354bf1620338e53f35312eece416e5058bd0a..92a4edc9f2999b0f87d497e7c9f5ecb78d30d7cf 100644
+index 32a2ff5978c74bce9d22f4625c854b85c5b33083..480e8aa9fc8c14432753f92c527dcfed9b186b11 100644
 --- BUILD.gn
 +++ BUILD.gn
 @@ -21,6 +21,7 @@ import("//build/config/ui.gni")
@@ -78,7 +78,7 @@ index bd411669389525e8f03eb329a4cf700ad89b62f3..fba7843d79796b903b592b69e2e1f2c7
  
  visual_studio_version_logs = [ "windows_sdk_version=${windows_sdk_version}" ]
 diff --git chrome/chrome_paks.gni chrome/chrome_paks.gni
-index 503cc9a40c00522c4b16b147837e7c1e640c2eb2..23cc07f39d1363611c48895e2f0c2848840df642 100644
+index ffc493041415809705f81cf6e0a0952d18c726b7..4d487002663c6bb8430f3d0830c3a36fc25d8896 100644
 --- chrome/chrome_paks.gni
 +++ chrome/chrome_paks.gni
 @@ -5,6 +5,7 @@
@@ -89,7 +89,7 @@ index 503cc9a40c00522c4b16b147837e7c1e640c2eb2..23cc07f39d1363611c48895e2f0c2848
  import("//chrome/browser/buildflags.gni")
  import("//chrome/common/features.gni")
  import("//components/compose/features.gni")
-@@ -534,6 +535,11 @@ template("chrome_extra_paks") {
+@@ -546,6 +547,11 @@ template("chrome_extra_paks") {
        ]
      }
  

@@ -1,8 +1,8 @@
 diff --git base/logging.cc base/logging.cc
-index d2354fd7b905b15ee7dbe0777125eea8c1370fee..e28d2e19723a0d10b69957376ab0bda114144452 100644
+index 4f4712f94f91afe33c8b628c3a8b263d1eb4f03d..1e690ea093024763b12ce39543eb62f385737004 100644
 --- base/logging.cc
 +++ base/logging.cc
-@@ -426,7 +426,30 @@ void WriteToFd(int fd, const char* data, size_t length) {
+@@ -428,7 +428,30 @@ void WriteToFd(int fd, const char* data, size_t length) {
    }
  }
  
@@ -33,7 +33,7 @@ index d2354fd7b905b15ee7dbe0777125eea8c1370fee..e28d2e19723a0d10b69957376ab0bda1
    // In case of an out-of-memory condition, this code could be reentered when
    // constructing and storing the key. Using a static is not thread-safe, but if
    // multiple threads are in the process of a fatal crash at the same time, this
-@@ -496,6 +519,11 @@ bool BaseInitLoggingImpl(const LoggingSettings& settings) {
+@@ -498,6 +521,11 @@ bool BaseInitLoggingImpl(const LoggingSettings& settings) {
    g_log_format = settings.log_format;
  #endif
  

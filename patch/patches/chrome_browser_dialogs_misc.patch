@@ -1,8 +1,8 @@
 diff --git chrome/browser/ui/extensions/extension_dialog_utils_views.cc chrome/browser/ui/extensions/extension_dialog_utils_views.cc
-index 08ce628533c966d3fd72d61c7a2dd6aebc6753c5..376ab7701e2b3a7052665ee3d7ed63027ea2619b 100644
+index aabc0f3b09b4cf062506c92d5c749ead3aad7a23..9dc32dd1b624fc04ec88695b1be24c8407e014d8 100644
 --- chrome/browser/ui/extensions/extension_dialog_utils_views.cc
 +++ chrome/browser/ui/extensions/extension_dialog_utils_views.cc
-@@ -88,10 +88,9 @@ void ShowDialog(Browser* browser,
+@@ -89,10 +89,9 @@ void ShowDialog(BrowserWindowInterface* browser,
                  std::unique_ptr<ui::DialogModel> dialog_model) {
    ToolbarButtonProvider* toolbar_button_provider =
        BrowserView::GetBrowserViewForBrowser(browser)->toolbar_button_provider();
@@ -16,7 +16,7 @@ index 08ce628533c966d3fd72d61c7a2dd6aebc6753c5..376ab7701e2b3a7052665ee3d7ed6302
        std::move(dialog_model), std::move(anchor_view),
        views::BubbleBorder::TOP_RIGHT);
 diff --git chrome/browser/ui/views/certificate_selector.cc chrome/browser/ui/views/certificate_selector.cc
-index fd0640557b4566d2a2c9f0a4d0c4b1ea92c079d8..45ca0218d039018b5108b861d0ddf367122fddab 100644
+index f33e742199d99d9c78b090d8ba161cc7bf1abcac..ee6dc7ff4c2bccad0c034b980ca6bffa557de0bc 100644
 --- chrome/browser/ui/views/certificate_selector.cc
 +++ chrome/browser/ui/views/certificate_selector.cc
 @@ -335,8 +335,13 @@ void CertificateSelector::ViewCertButtonPressed() {

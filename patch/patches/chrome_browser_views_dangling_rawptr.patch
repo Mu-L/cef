@@ -38,10 +38,10 @@ index 62fd5c2aa247ebb0b0e4ea75f5403ff8c102f3f4..52c5ac90e857906b96b02cb34c7abb46
    if (!widget_initialization_callback_.is_null()) {
      bubble_view->RegisterWidgetInitializedCallback(
 diff --git chrome/browser/ui/views/tab_search_bubble_host.cc chrome/browser/ui/views/tab_search_bubble_host.cc
-index 6e5ca1eeb05fff9e0930147d5f356c2bc9f17318..36dd1422d35a97497d6ff613f1b1a87a6eae5776 100644
+index b332361e984a0ca163559415c2bc59648a43ac27..50fcbc0a23f017264dc8913b715e11a36bf0abf1 100644
 --- chrome/browser/ui/views/tab_search_bubble_host.cc
 +++ chrome/browser/ui/views/tab_search_bubble_host.cc
-@@ -66,7 +66,7 @@ TabSearchOpenAction GetActionForEvent(const ui::Event& event) {
+@@ -63,7 +63,7 @@ TabSearchOpenAction GetActionForEvent(const ui::Event& event) {
  TabSearchBubbleHost::TabSearchBubbleHost(
      views::Button* button,
      BrowserWindowInterface* browser_window_interface)
@@ -50,7 +50,7 @@ index 6e5ca1eeb05fff9e0930147d5f356c2bc9f17318..36dd1422d35a97497d6ff613f1b1a87a
        profile_(browser_window_interface->GetProfile()),
        browser_window_interface_(browser_window_interface),
        webui_bubble_manager_(WebUIBubbleManager::Create<TabSearchUI>(
-@@ -262,9 +262,11 @@ bool TabSearchBubbleHost::ShowTabSearchBubble(
+@@ -222,9 +222,11 @@ bool TabSearchBubbleHost::ShowTabSearchBubble(
  
    // Hold the pressed lock while the |bubble_| is active.
    // LINT.IfChange(pressed_lock_)
@@ -66,27 +66,27 @@ index 6e5ca1eeb05fff9e0930147d5f356c2bc9f17318..36dd1422d35a97497d6ff613f1b1a87a
    return true;
  }
 diff --git chrome/browser/ui/views/tab_search_bubble_host.h chrome/browser/ui/views/tab_search_bubble_host.h
-index ca1008f11d934e0a203a5bfc20697f65e79f6843..22cbb3c8d7920d3c83ca26beb42cc04869879859 100644
+index 3340182eb061ad857fc3e408a3ce1e0e69bece34..1806699c25d160f84b7e3c75aa35b475ac8394f9 100644
 --- chrome/browser/ui/views/tab_search_bubble_host.h
 +++ chrome/browser/ui/views/tab_search_bubble_host.h
-@@ -10,6 +10,7 @@
+@@ -9,6 +9,7 @@
+ #include "base/observer_list.h"
  #include "base/time/time.h"
- #include "chrome/browser/ui/tabs/organization/tab_organization_observer.h"
  #include "chrome/browser/ui/views/bubble/webui_bubble_manager.h"
 +#include "ui/views/view_tracker.h"
  #include "chrome/browser/ui/views/bubble/webui_bubble_manager_observer.h"
  #include "chrome/browser/ui/views/tabs/tab_slot_controller.h"
  #include "chrome/browser/ui/webui/tab_search/tab_search.mojom.h"
-@@ -65,7 +66,7 @@ class TabSearchBubbleHost : public views::WidgetObserver,
+@@ -55,7 +56,7 @@ class TabSearchBubbleHost : public views::WidgetObserver,
  
-   Browser* GetBrowser();
+   BrowserWindowInterface* GetBrowser();
  
 -  views::View* button() { return button_; }
 +  views::View* button() { return button_tracker_.view(); }
  
    WebUIBubbleManager* webui_bubble_manager_for_testing() {
      return webui_bubble_manager_.get();
-@@ -82,7 +83,7 @@ class TabSearchBubbleHost : public views::WidgetObserver,
+@@ -72,7 +73,7 @@ class TabSearchBubbleHost : public views::WidgetObserver,
    TabSearchUI* GetTabSearchUI();
  
    // The anchor button for the tab search bubble.
@@ -95,7 +95,7 @@ index ca1008f11d934e0a203a5bfc20697f65e79f6843..22cbb3c8d7920d3c83ca26beb42cc048
  
    const raw_ptr<Profile> profile_;
  
-@@ -97,7 +98,7 @@ class TabSearchBubbleHost : public views::WidgetObserver,
+@@ -87,7 +88,7 @@ class TabSearchBubbleHost : public views::WidgetObserver,
  
    base::ObserverList<TabSearchBubbleHostObserver> observers_;
  

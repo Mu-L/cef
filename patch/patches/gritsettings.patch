@@ -1,8 +1,8 @@
 diff --git tools/gritsettings/resource_ids.spec tools/gritsettings/resource_ids.spec
-index bb7dc253bbc1a9e8b194bc55de59bd4e6b7aecc4..000fc0c8f9547a57d679af23ba01ed8e15b64c0c 100644
+index ffd47250ce5a6a75471bb65aaf3d65b550be3586..1ca7bfe4edb81d0c31fc8f8cd985458e2dc881f2 100644
 --- tools/gritsettings/resource_ids.spec
 +++ tools/gritsettings/resource_ids.spec
-@@ -1660,6 +1660,13 @@
+@@ -1681,6 +1681,13 @@
    # END "everything else" section.
    # Everything but chrome/, components/, content/, and ios/
  

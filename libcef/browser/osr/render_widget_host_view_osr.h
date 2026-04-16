@@ -205,11 +205,10 @@ class CefRenderWidgetHostViewOSR
   const viz::FrameSinkId& GetFrameSinkId() const override;
   viz::FrameSinkId GetRootFrameSinkId() override;
   void NotifyHostAndDelegateOnWasShown(
-      blink::mojom::RecordContentToVisibleTimeRequestPtr visible_time_request)
-      override;
+      std::optional<blink::RecordContentToVisibleTimeRequest>
+          visible_time_request) override;
   void RequestSuccessfulPresentationTimeFromHostOrDelegate(
-      blink::mojom::RecordContentToVisibleTimeRequestPtr visible_time_request)
-      override;
+      blink::RecordContentToVisibleTimeRequest visible_time_request) override;
   void CancelSuccessfulPresentationTimeRequestForHostAndDelegate() override;
 
   void OnFrameComplete(const viz::BeginFrameAck& ack);

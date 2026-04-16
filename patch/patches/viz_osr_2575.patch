@@ -1,8 +1,8 @@
 diff --git components/viz/host/host_display_client.cc components/viz/host/host_display_client.cc
-index b153c538488b7b77af0630a454604d9fb7eba487..5f35de1f271b87ff1f0b3ab4cd186047c3b16921 100644
+index 65df78d7f2a311633e8512f46efa005c41930873..bd67f420987e9d3fdbe3246c1b1bd32d9a2935ed 100644
 --- components/viz/host/host_display_client.cc
 +++ components/viz/host/host_display_client.cc
-@@ -49,9 +49,9 @@ void HostDisplayClient::OnDisplayReceivedCALayerParams(
+@@ -50,9 +50,9 @@ void HostDisplayClient::OnDisplayReceivedCALayerParams(
  }
  #endif
  
@@ -13,7 +13,7 @@ index b153c538488b7b77af0630a454604d9fb7eba487..5f35de1f271b87ff1f0b3ab4cd186047
    if (!NeedsToUseLayerWindow(widget_)) {
      DLOG(ERROR) << "HWND shouldn't be using a layered window";
      return;
-@@ -59,7 +59,10 @@ void HostDisplayClient::CreateLayeredWindowUpdater(
+@@ -60,7 +60,10 @@ void HostDisplayClient::CreateLayeredWindowUpdater(
  
    layered_window_updater_ =
        std::make_unique<LayeredWindowUpdaterImpl>(widget_, std::move(receiver));
@@ -66,7 +66,7 @@ index 8af69cac78b7488d28f1f05ccb174793fe5148cd..9f74e511c263d147b5fbe81fe100d217
   private:
    const HWND hwnd_;
 diff --git components/viz/service/BUILD.gn components/viz/service/BUILD.gn
-index 7aab80076a041fac6cd81f477456a6c9169c3cb5..4e48d067b540a96557ac9a76fb1a0d92d47be5df 100644
+index 42a96534b0d6ec220626b888bfc97f382dfc1210..fddfcd456c19667cd71b0db126bb5b65973704f7 100644
 --- components/viz/service/BUILD.gn
 +++ components/viz/service/BUILD.gn
 @@ -278,6 +278,8 @@ viz_component("service") {
@@ -171,10 +171,10 @@ index f49bbc5d568f0cb323a22997a949e2cae8f35d59..1ae39ed5164c89f075b61ce63f2ffb70
    const raw_ptr<GpuServiceImpl> gpu_service_impl_;
  
 diff --git components/viz/service/display_embedder/software_output_device_win.cc components/viz/service/display_embedder/software_output_device_win.cc
-index b5154321105f08335b67ad2d552afa61337a4976..66048e7ca6a149c267debe333976178c45ab651a 100644
+index 4f9e8946fa02d859e92a6896beba82721914f868..cf20c96a84c5551eba592fecfce21350104491bd 100644
 --- components/viz/service/display_embedder/software_output_device_win.cc
 +++ components/viz/service/display_embedder/software_output_device_win.cc
-@@ -156,8 +156,9 @@ void SoftwareOutputDeviceWinProxy::EndPaintDelegated(
+@@ -158,8 +158,9 @@ void SoftwareOutputDeviceWinProxy::EndPaintDelegated(
    if (!canvas_)
      return;
  
@@ -272,10 +272,10 @@ index 9addccb41bff12965c7038b994cdf865b9d9bf99..badcfdf774a0343daae5dbc228517ac3
    // For destroying the GL context/surface that draw to a platform window before
    // the platform window is destroyed.
 diff --git services/viz/privileged/mojom/compositing/display_private.mojom services/viz/privileged/mojom/compositing/display_private.mojom
-index 00bd84b857fbd5915edf9e45c805e06a3a76a467..18c4391ba498f0379a1ce4204f72c35baa3dd4ec 100644
+index 8d943f9733af969906382e0f8e0988a50356dade..1219bb98872c01852687d5f4b96aa08e7fc09a09 100644
 --- services/viz/privileged/mojom/compositing/display_private.mojom
 +++ services/viz/privileged/mojom/compositing/display_private.mojom
-@@ -130,7 +130,6 @@ interface DisplayClient {
+@@ -129,7 +129,6 @@ interface DisplayClient {
  
    // Creates a LayeredWindowUpdater implementation to draw into a layered
    // window.
@@ -284,7 +284,7 @@ index 00bd84b857fbd5915edf9e45c805e06a3a76a467..18c4391ba498f0379a1ce4204f72c35b
  
    // Sends the created child window to the browser process so that it can be
 diff --git services/viz/privileged/mojom/compositing/frame_sink_manager.mojom services/viz/privileged/mojom/compositing/frame_sink_manager.mojom
-index 454c1872d6c247687a73391c57007f8ca74725ea..98983b5f07fd112240c2090bc5e81a25df0c36c8 100644
+index a0e993a64d6f4e033910951d193e63bc71ed5ffe..8440670f9566dabc8bc89a42b63e4268982f47c0 100644
 --- services/viz/privileged/mojom/compositing/frame_sink_manager.mojom
 +++ services/viz/privileged/mojom/compositing/frame_sink_manager.mojom
 @@ -62,6 +62,8 @@ struct RootCompositorFrameSinkParams {

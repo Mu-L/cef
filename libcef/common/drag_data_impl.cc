@@ -76,9 +76,23 @@ CefString CefDragDataImpl::GetLinkTitle() {
   return !data_.url_infos.empty() ? data_.url_infos[0].title : std::u16string();
 }
 
+// The "mime_type:file_name:url" serialized form (e.g.
+// "text/plain:test.txt:file:///test.txt") is the `ui::kMimeTypeDownloadUrl`
+// ("downloadurl") drag string format. Starting in M148, the browser parses it
+// into `content::DownloadUrlMetadata` via `ParseDownloadMetadata()` in
+// content/browser/renderer_host/data_transfer_util.cc; prior to M148,
+// `DropData::download_metadata` was a raw `std::u16string` holding the same
+// serialized form. We re-serialize here to preserve the CEF API contract.
 CefString CefDragDataImpl::GetLinkMetadata() {
   base::AutoLock lock_scope(lock_);
-  return data_.download_metadata;
+  if (!data_.download_metadata) {
+    return CefString();
+  }
+  const auto& metadata = *data_.download_metadata;
+  std::string serialized = metadata.mime_type + ":" +
+                           metadata.suggested_file_name + ":" +
+                           metadata.url.spec();
+  return serialized;
 }
 
 CefString CefDragDataImpl::GetFragmentText() {
@@ -170,7 +184,33 @@ void CefDragDataImpl::SetLinkTitle(const CefString& title) {
 void CefDragDataImpl::SetLinkMetadata(const CefString& data) {
   base::AutoLock lock_scope(lock_);
   CHECK_READONLY_RETURN_VOID();
-  data_.download_metadata = data.ToString16();
+  const std::string& serialized = data;
+  if (serialized.empty()) {
+    data_.download_metadata = std::nullopt;
+    return;
+  }
+  const char separator = ':';
+  size_t mime_type_end_pos = serialized.find(separator);
+  if (mime_type_end_pos == std::string::npos) {
+    data_.download_metadata = std::nullopt;
+    return;
+  }
+  size_t file_name_end_pos = serialized.find(separator, mime_type_end_pos + 1);
+  if (file_name_end_pos == std::string::npos) {
+    data_.download_metadata = std::nullopt;
+    return;
+  }
+  GURL parsed_url = GURL(serialized.substr(file_name_end_pos + 1));
+  if (!parsed_url.is_valid()) {
+    data_.download_metadata = std::nullopt;
+    return;
+  }
+  content::DownloadUrlMetadata metadata;
+  metadata.mime_type = serialized.substr(0, mime_type_end_pos);
+  metadata.suggested_file_name = serialized.substr(
+      mime_type_end_pos + 1, file_name_end_pos - mime_type_end_pos - 1);
+  metadata.url = std::move(parsed_url);
+  data_.download_metadata = std::move(metadata);
 }
 
 void CefDragDataImpl::SetFragmentText(const CefString& text) {

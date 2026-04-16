@@ -1,5 +1,5 @@
 diff --git content/browser/scheduler/browser_task_executor.cc content/browser/scheduler/browser_task_executor.cc
-index 657bdaa8e50a8b9db9604745d89667c094a881e7..112cd929ba17b08ac4251c5df55173b1d8cd4c17 100644
+index 996e402006f10e1790a617f7093a6a6eac7a0017..3b54cf83f692b920ab5b6ace3eb05e1a6095343a 100644
 --- content/browser/scheduler/browser_task_executor.cc
 +++ content/browser/scheduler/browser_task_executor.cc
 @@ -216,11 +216,9 @@ void BrowserTaskExecutor::ResetForTesting() {

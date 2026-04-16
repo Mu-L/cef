@@ -1,8 +1,8 @@
 diff --git chrome/browser/taskbar/taskbar_decorator_win.cc chrome/browser/taskbar/taskbar_decorator_win.cc
-index 201dc29dd1c6b6ee38fe26fcbd804a578273aec2..5123e409216c679078bc3da1fbb38384516b3884 100644
+index 90969f7bb07a642d37a348d33d7220ec035d7a3f..a4fa62b02748a2648f535e265f1b136d3489358d 100644
 --- chrome/browser/taskbar/taskbar_decorator_win.cc
 +++ chrome/browser/taskbar/taskbar_decorator_win.cc
-@@ -21,12 +21,14 @@
+@@ -20,12 +20,14 @@
  #include "base/task/single_thread_task_runner.h"
  #include "base/task/thread_pool.h"
  #include "base/win/scoped_gdi_object.h"
@@ -17,7 +17,7 @@ index 201dc29dd1c6b6ee38fe26fcbd804a578273aec2..5123e409216c679078bc3da1fbb38384
  #include "skia/ext/font_utils.h"
  #include "skia/ext/image_operations.h"
  #include "skia/ext/legacy_display_globals.h"
-@@ -204,6 +206,22 @@ void UpdateTaskbarDecoration(Profile* profile, gfx::NativeWindow window) {
+@@ -203,6 +205,22 @@ void UpdateTaskbarDecoration(Profile* profile, gfx::NativeWindow window) {
      return;
    }
  

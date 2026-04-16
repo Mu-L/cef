@@ -108,7 +108,7 @@ index f2b1cdff827eae3726febe590f2f30b5f6d89046..cb18a6fe7c76483fe79abf64bbec8ad2
  }
  
 diff --git content/app/content_main_runner_impl.cc content/app/content_main_runner_impl.cc
-index b795a9dbf898570a7cd8469ee386c4edf4bfa275..62ba4b56ff59fe1f20615df0bb24bf0d3f15e6c1 100644
+index e795339c000cf695ca05c6d3c736678fa47df21e..031239c3bebc435d4b7e076a90ee7c3c30c8035a 100644
 --- content/app/content_main_runner_impl.cc
 +++ content/app/content_main_runner_impl.cc
 @@ -50,6 +50,7 @@
