@@ -1260,7 +1260,7 @@ typedef enum {
   ///
   CEF_WOD_NEW_PICTURE_IN_PICTURE,
 
-#if CEF_API_ADDED(CEF_NEXT)
+#if CEF_API_ADDED(14800)
   ///
   /// Opens a link in a split view alongside the current tab.
   ///
@@ -3531,7 +3531,7 @@ typedef enum {
   /// Front L, Front R, LFE, Back C
   CEF_CHANNEL_LAYOUT_3_1_BACK,
 
-#if CEF_API_ADDED(CEF_NEXT)
+#if CEF_API_ADDED(14800)
   /// Front L, Front R, Front C, LFE, Side L, Side R,
   /// Top Front L, Top Front R, Top Back L, Top Back R
   CEF_CHANNEL_LAYOUT_5_1_4,
@@ -3721,7 +3721,7 @@ typedef enum {
   CEF_CPAIT_RECORD_REPLAY,
   CEF_CPAIT_INDIGO,
 #endif
-#if CEF_API_ADDED(CEF_NEXT)
+#if CEF_API_ADDED(14800)
   CEF_CPAIT_FEDERATION,
   CEF_CPAIT_GLIC,
 #endif
